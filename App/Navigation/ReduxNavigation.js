@@ -8,7 +8,8 @@ function ReduxNavigation (props) {
   const { dispatch, nav } = props
   const navigation = ReactNavigation.addNavigationHelpers({
     dispatch,
-    state: nav
+    state: nav,
+    addListener: (eventName, handler) => {}
   })
 
   return <AppNavigation navigation={navigation} />
