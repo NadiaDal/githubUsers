@@ -62,7 +62,7 @@ class UsersScreen extends Component {
     const { users } = this.props
     return (
       <View style={styles.container}>
-          {users.length === 0 ? this.renderLoader() : this.renderUserProfiles()}
+          {users === null || users.length === 0 ? this.renderLoader() : this.renderUserProfiles()}
       </View>
     )
   }
