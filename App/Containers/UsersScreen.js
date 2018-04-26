@@ -39,6 +39,12 @@ class UsersScreen extends Component {
     this.props.loadNext(nextPage)
   }
 
+  renderErrorMsg = () => {
+    return (
+      <Text style={styles.error}>The search result is not available</Text>
+    )
+  }
+
   renderPhoto = ({item}) => {
     return (
       <TouchableOpacity
@@ -59,10 +65,10 @@ class UsersScreen extends Component {
   }
 
   render () {
-    const { users } = this.props
+    const { users, error } = this.props
     return (
       <View style={styles.container}>
-          {users === null || users.length === 0 ? this.renderLoader() : this.renderUserProfiles()}
+          {error ? this.renderErrorMsg() : (users === null || users.length === 0 ? this.renderLoader() : this.renderUserProfiles())}
       </View>
     )
   }
@@ -71,6 +77,7 @@ class UsersScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     users: state.users.data,
+    error: state.users.error,
     query: state.users.query
   }
 }

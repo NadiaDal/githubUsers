@@ -30,5 +30,9 @@ export default StyleSheet.create({
     fontSize: 20,
     color: Colors.darkishGreen
   },
-  url: {}
+  url: {},
+  error: {
+    fontSize: 20,
+    color: Colors.bloodOrange
+  }
 })
