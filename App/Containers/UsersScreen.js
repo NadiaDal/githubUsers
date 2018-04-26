@@ -51,7 +51,7 @@ class UsersScreen extends Component {
           />
           <View>
             <Text style={styles.login}>{item.login}</Text>
-            <Text style={styles.url}>{item.html_url}</Text>
+            <Text numberOfLines={2} ellipsizeMode={'head'} style={styles.url}>{item.html_url}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -62,7 +62,7 @@ class UsersScreen extends Component {
     const { users } = this.props
     return (
       <View style={styles.container}>
-          {users === null ? this.renderLoader() : this.renderUserProfiles()}
+          {users.length === 0 ? this.renderLoader() : this.renderUserProfiles()}
       </View>
     )
   }

@@ -4,6 +4,9 @@ import React, { Component } from 'react'
 import { Provider } from 'react-redux'
 import RootContainer from './RootContainer'
 import createStore from '../Redux'
+import { BackHandler, Platform } from 'react-native'
+import { NavigationActions } from 'react-navigation'
+import NetworkListener from '../Services/NetworkListener'
 
 // create our store
 const store = createStore()
@@ -18,6 +21,26 @@ const store = createStore()
  * We separate like this to play nice with React Native's hot reloading.
  */
 class App extends Component {
+  componentDidMount () {
+    NetworkListener.start()
+    if (Platform.OS === 'ios') return
+    BackHandler.addEventListener('hardwareBackPress', this.onAndroidBackButton)
+  }
+
+  onAndroidBackButton () {
+    const {index, routes} = store.getState().nav
+    let isEnterScreen = false
+    if (routes[index].routeName === 'UsersScreen') {
+      isEnterScreen = true
+    }
+    let shouldStayInApp = true
+    if (isEnterScreen) {
+      shouldStayInApp = false
+    }
+    store.dispatch(NavigationActions.back())
+    return shouldStayInApp
+  }
+
   render () {
     return (
       <Provider store={store}>

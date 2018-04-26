@@ -5,13 +5,16 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
-    backgroundColor: Colors.ember
+    backgroundColor: Colors.sunflowerYellow
   },
   followerCard: {
     justifyContent: 'center',
-    width: Metrics.screenWidth / 2 - 6,
+    alignItems: 'center',
+    width: Metrics.screenWidth / 3 - 6,
     margin: 3,
-    backgroundColor: Colors.snow
+    backgroundColor: Colors.snow,
+    borderRadius: 10,
+    padding: 8
   },
   avatar: {
     width: 50,
@@ -23,6 +26,6 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   backButtonText: {
-    color: Colors.text
+    color: Colors.bloodOrange
   },
 })

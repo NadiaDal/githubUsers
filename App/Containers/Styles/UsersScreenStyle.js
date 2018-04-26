@@ -20,7 +20,8 @@ export default StyleSheet.create({
   },
   profile: {
     flexDirection: 'row',
-    margin: 5,
+    width: Metrics.screenWidth - 20,
+    margin: 10,
     padding: 10,
     backgroundColor: Colors.silver,
     borderRadius: 10

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text, FlatList, Image } from 'react-native'
+import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
 
@@ -35,7 +35,7 @@ class FollowersScreen extends Component {
           <FlatList
             keyExtractor={(item, index) => index.toString()}
             data={this.props.followers}
-            numColumns={2}
+            numColumns={3}
             horizontal={false}
             renderItem={this.renderFollower}
           />
