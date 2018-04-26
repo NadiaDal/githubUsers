@@ -8,11 +8,12 @@ import DebugConfig from '../Config/DebugConfig'
 import { StartupTypes } from '../Redux/StartupRedux'
 import { GithubTypes } from '../Redux/GithubRedux'
 import { UsersTypes } from '../Redux/UsersRedux'
+import { FollowersTypes } from '../Redux/FollowersRedux'
 
 /* ------------- Sagas ------------- */
 
 import { startup } from './StartupSagas'
-import { getAllUsers } from './UsersSagas'
+import { getAllUsers, getFollowers } from './UsersSagas'
 import { getUserAvatar } from './GithubSagas'
 
 /* ------------- API ------------- */
@@ -28,6 +29,7 @@ export default function * root () {
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
     takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api),
-    takeLatest(UsersTypes.USERS_REQUEST, getAllUsers, api)
+    takeLatest(UsersTypes.USERS_REQUEST, getAllUsers, api),
+    takeLatest(FollowersTypes.FOLLOWERS_REQUEST, getFollowers, api)
   ])
 }

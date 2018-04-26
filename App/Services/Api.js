@@ -38,6 +38,7 @@ const create = (baseURL = 'https://api.github.com/') => {
   const getRate = () => api.get('rate_limit')
   const getUser = (username) => api.get('search/users', {q: username})
   const getUsers = (query) => api.get('https://api.github.com/users', query)
+  const getFollowers = (login) => api.get(`https://api.github.com/users/${login}/followers`)
 
   // ------
   // STEP 3
@@ -56,7 +57,8 @@ const create = (baseURL = 'https://api.github.com/') => {
     getRoot,
     getRate,
     getUser,
-    getUsers
+    getUsers,
+    getFollowers
   }
 }
 
