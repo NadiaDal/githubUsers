@@ -4,6 +4,7 @@ import { ApplicationStyles, Metrics, Colors } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
+    flex: 1,
     backgroundColor: Colors.ember
   },
   followerCard: {
@@ -16,5 +17,12 @@ export default StyleSheet.create({
     width: 50,
     height: 50,
     borderRadius: 25
-  }
+  },
+  backButton: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  backButtonText: {
+    color: Colors.text
+  },
 })

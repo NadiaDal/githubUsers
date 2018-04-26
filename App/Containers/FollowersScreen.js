@@ -1,10 +1,21 @@
 import React, { Component } from 'react'
 import { View, Text, FlatList, Image } from 'react-native'
 import { connect } from 'react-redux'
+import { NavigationActions } from 'react-navigation'
+
 import styles from './Styles/FollowersScreenStyle'
 
 class FollowersScreen extends Component {
 
+  renderBackButton = () => {
+    return (
+      <TouchableOpacity
+        style={styles.backButton}
+        onPress={this.props.goBack}>
+        <Text style={styles.backButtonText}>Back</Text>
+      </TouchableOpacity>
+    )
+  }
   renderFollower = ({item}) => {
     return (
       <View style={styles.followerCard}>
@@ -20,6 +31,7 @@ class FollowersScreen extends Component {
     return (
       <View style={styles.container}>
           <Text>FollowersScreen</Text>
+          {this.renderBackButton()}
           <FlatList
             keyExtractor={(item, index) => index.toString()}
             data={this.props.followers}
@@ -40,6 +52,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    goBack: () => dispatch(NavigationActions.back()),
   }
 }
 
