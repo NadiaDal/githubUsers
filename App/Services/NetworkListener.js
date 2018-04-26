@@ -2,9 +2,8 @@ import {NetInfo, Alert} from 'react-native'
 
 class NetworkListener {
   static start () {
-    NetInfo.getConnectionInfo().done((reach) => {
-      NetworkListener._connectionDidChange(reach)
-      console.log('Initial: ' + reach)
+    NetInfo.getConnectionInfo().done((connectionInfo) => {
+      NetworkListener._connectionDidChange(connectionInfo)
     })
 
     NetInfo.addEventListener(
@@ -12,14 +11,13 @@ class NetworkListener {
       handleConnectivityChange
     )
 
-    function handleConnectivityChange (reach) {
-      console.log('First change: ' + reach)
-      NetworkListener._connectionDidChange(reach)
+    function handleConnectivityChange (connectionInfo) {
+      NetworkListener._connectionDidChange(connectionInfo)
     }
   }
 
-  static _connectionDidChange (state) {
-    if (state === 'none') {
+  static _connectionDidChange (connectionInfo) {
+    if (connectionInfo.type === 'none') {
       Alert.alert('No internet connection')
     } else {
     }
