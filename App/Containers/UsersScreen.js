@@ -3,6 +3,7 @@ import { View, Text, ActivityIndicator, FlatList, TouchableOpacity, Image } from
 import { connect } from 'react-redux'
 import { Colors } from '../Themes'
 import UsersActions from '../Redux/UsersRedux'
+import FollowersActions from '../Redux/FollowersRedux'
 
 // Styles
 import styles from './Styles/UsersScreenStyle'
@@ -11,8 +12,9 @@ class UsersScreen extends Component {
   renderLoader = () => {
     return (
       <ActivityIndicator
-        size={'large'}
-        color={Colors.bloodOrange}
+        style={styles.loader}
+        size={50}
+        color={Colors.silver}
       />
     )
   }
@@ -21,7 +23,7 @@ class UsersScreen extends Component {
     const {users} = this.props
     return (
       <FlatList
-        keyExtractor={(item, index) => index}
+        keyExtractor={(item, index) => index.toString()}
         data={users}
         numColumns={1}
         horizontal={false}
@@ -40,7 +42,7 @@ class UsersScreen extends Component {
   renderPhoto = ({item}) => {
     return (
       <TouchableOpacity
-        onPress={() => {}}
+        onPress={() => this.props.getFollowers(item.login)}
       >
         <View style={styles.profile}>
           <Image
@@ -49,7 +51,7 @@ class UsersScreen extends Component {
           />
           <View>
             <Text style={styles.login}>{item.login}</Text>
-            <Text>{item.html_url}</Text>
+            <Text style={styles.url}>{item.html_url}</Text>
           </View>
         </View>
       </TouchableOpacity>
@@ -60,7 +62,6 @@ class UsersScreen extends Component {
     const { users } = this.props
     return (
       <View style={styles.container}>
-          <Text>UsersScreen</Text>
           {users === null ? this.renderLoader() : this.renderUserProfiles()}
       </View>
     )
@@ -76,7 +77,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    loadNext: (query) => dispatch(UsersActions.usersRequest(query))
+    loadNext: (query) => dispatch(UsersActions.usersRequest(query)),
+    getFollowers: (login) => dispatch(FollowersActions.followersRequest(login))
   }
 }
 
