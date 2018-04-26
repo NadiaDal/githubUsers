@@ -5,7 +5,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
-    backgroundColor: Colors.sunflowerYellow
+    backgroundColor: Colors.darkishGreen
   },
   followerCard: {
     justifyContent: 'center',
@@ -26,6 +26,8 @@ export default StyleSheet.create({
     alignItems: 'center'
   },
   backButtonText: {
-    color: Colors.bloodOrange
+    fontSize: 18,
+    padding: 10,
+    color: Colors.text
   },
 })

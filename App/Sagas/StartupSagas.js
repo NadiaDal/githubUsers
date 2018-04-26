@@ -3,7 +3,6 @@ import UsersActions from '../Redux/UsersRedux'
 import { Metrics } from '../Themes'
 const { screenHeight } = Metrics
 
-
 export function * startup (api, action) {
   try {
     const query = {

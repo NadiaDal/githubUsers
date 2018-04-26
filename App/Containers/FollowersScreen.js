@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { NavigationActions } from 'react-navigation'
+import UserCard from '../Components/UserCard'
 
 import styles from './Styles/FollowersScreenStyle'
 
@@ -12,7 +13,7 @@ class FollowersScreen extends Component {
       <TouchableOpacity
         style={styles.backButton}
         onPress={this.props.goBack}>
-        <Text style={styles.backButtonText}>Back</Text>
+        <Text style={styles.backButtonText}>Go Back</Text>
       </TouchableOpacity>
     )
   }
@@ -30,15 +31,18 @@ class FollowersScreen extends Component {
   render () {
     return (
       <View style={styles.container}>
-          <Text>FollowersScreen</Text>
-          {this.renderBackButton()}
-          <FlatList
-            keyExtractor={(item, index) => index.toString()}
-            data={this.props.followers}
-            numColumns={3}
-            horizontal={false}
-            renderItem={this.renderFollower}
-          />
+        {this.renderBackButton()}
+        <UserCard
+          item={this.props.currentUser}
+        />
+        <Text style={styles.backButtonText}>Followers</Text>
+        <FlatList
+          keyExtractor={(item, index) => index.toString()}
+          data={this.props.followers}
+          numColumns={3}
+          horizontal={false}
+          renderItem={this.renderFollower}
+        />
       </View>
     )
   }
@@ -46,7 +50,8 @@ class FollowersScreen extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    followers: state.followers.payload
+    followers: state.followers.payload,
+    currentUser: state.followers.currentUser
   }
 }
 

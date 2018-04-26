@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text, ActivityIndicator, FlatList, TouchableOpacity, Image } from 'react-native'
+import { View, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 import { Colors } from '../Themes'
 import UsersActions from '../Redux/UsersRedux'
 import FollowersActions from '../Redux/FollowersRedux'
+import UserCard from '../Components/UserCard'
+import {debounce} from '../Services'
 
 // Styles
 import styles from './Styles/UsersScreenStyle'
@@ -11,11 +13,13 @@ import styles from './Styles/UsersScreenStyle'
 class UsersScreen extends Component {
   renderLoader = () => {
     return (
-      <ActivityIndicator
-        style={styles.loader}
-        size={50}
-        color={Colors.silver}
-      />
+      <View style={styles.loaderContainer}>
+        <ActivityIndicator
+          style={styles.loader}
+          size={50}
+          color={Colors.silver}
+        />
+      </View>
     )
   }
 
@@ -27,7 +31,7 @@ class UsersScreen extends Component {
         data={users}
         numColumns={1}
         horizontal={false}
-        renderItem={this.renderPhoto}
+        renderItem={this.renderUser}
         onEndReached={this.loadNext}
       />
     )
@@ -39,21 +43,14 @@ class UsersScreen extends Component {
     this.props.loadNext(nextPage)
   }
 
-  renderPhoto = ({item}) => {
+  renderUser = ({item}) => {
     return (
       <TouchableOpacity
-        onPress={() => this.props.getFollowers(item.login)}
+        onPress={debounce(() => this.props.getFollowers(item))}
       >
-        <View style={styles.profile}>
-          <Image
-            style={styles.avatar}
-            source={{uri: item.avatar_url}}
-          />
-          <View>
-            <Text style={styles.login}>{item.login}</Text>
-            <Text numberOfLines={2} ellipsizeMode={'head'} style={styles.url}>{item.html_url}</Text>
-          </View>
-        </View>
+        <UserCard
+          item={item}
+        />
       </TouchableOpacity>
     )
   }
@@ -62,7 +59,8 @@ class UsersScreen extends Component {
     const { users } = this.props
     return (
       <View style={styles.container}>
-          {users === null || users.length === 0 ? this.renderLoader() : this.renderUserProfiles()}
+        {users === null || users.length === 0 ? this.renderLoader() : this.renderUserProfiles()}
+        {this.props.fetching && this.renderLoader()}
       </View>
     )
   }
@@ -71,6 +69,7 @@ class UsersScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     users: state.users.data,
+    fetching: state.followers.fetching,
     query: state.users.query
   }
 }
@@ -78,7 +77,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     loadNext: (query) => dispatch(UsersActions.usersRequest(query)),
-    getFollowers: (login) => dispatch(FollowersActions.followersRequest(login))
+    getFollowers: (login, currentUser) => dispatch(FollowersActions.followersRequest(login, currentUser))
   }
 }
 

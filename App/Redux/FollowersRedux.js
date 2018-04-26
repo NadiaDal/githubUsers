@@ -4,7 +4,7 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  followersRequest: ['login'],
+  followersRequest: ['currentUser'],
   followersSuccess: ['payload'],
   followersFailure: null
 })
@@ -15,23 +15,22 @@ export default Creators
 /* ------------- Initial State ------------- */
 
 export const INITIAL_STATE = Immutable({
-  data: null,
-  fetching: null,
+  fetching: false,
   payload: null,
-  error: null
+  error: false,
+  currentUser: {}
 })
 
 /* ------------- Selectors ------------- */
 
 export const FollowersSelectors = {
-  getData: state => state.data
 }
 
 /* ------------- Reducers ------------- */
 
 // request the data from an api
-export const request = (state, { data }) =>
-  state.merge({ fetching: true, data, payload: null })
+export const request = (state, {currentUser}) =>
+  state.merge({ fetching: true, payload: null, currentUser })
 
 // successful api lookup
 export const success = (state, action) => {
