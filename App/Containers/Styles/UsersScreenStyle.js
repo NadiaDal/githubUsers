@@ -19,7 +19,6 @@ export default StyleSheet.create({
     borderRadius: 10
   },
   profile: {
-    flex: 1,
     flexDirection: 'row',
     margin: 5,
     padding: 10,
@@ -30,7 +29,5 @@ export default StyleSheet.create({
     fontSize: 20,
     color: Colors.darkishGreen
   },
-  url: {
-    padding: 5
-  }
+  url: {}
 })

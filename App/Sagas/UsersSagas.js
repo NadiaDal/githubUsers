@@ -1,6 +1,7 @@
 import { call, put, select } from 'redux-saga/effects'
 import UsersActions from '../Redux/UsersRedux'
-import FollowersActions from '../Redux/UsersRedux'
+import FollowersActions from '../Redux/FollowersRedux'
+import { NavigationActions } from 'react-navigation'
 
 export function * getAllUsers (api, {query}) {
   const response = yield call(api.getUsers, query)
@@ -14,7 +15,8 @@ export function * getAllUsers (api, {query}) {
 export function * getFollowers(api, {login}) {
   const response = yield call(api.getFollowers, login)
   if (response.ok) {
-    yield put(FollowersActions.followersSuccess(response.data, query))
+    yield put(FollowersActions.followersSuccess(response.data))
+    yield put(NavigationActions.navigate({routeName: 'FollowersScreen'}))
   } else {
     yield put(FollowersActions.followersFailure())
   }
