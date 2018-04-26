@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`UserCard component renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#F7F7F7",
+      "borderRadius": 10,
+      "flexDirection": "row",
+      "marginBottom": 5,
+      "marginLeft": 10,
+      "marginRight": 10,
+      "marginTop": 5,
+      "padding": 10,
+      "width": 730,
+    }
+  }
+>
+  <Image
+    source={
+      Object {
+        "uri": "https://avatars0.githubusercontent.com/u/2?v=4",
+      }
+    }
+    style={
+      Object {
+        "borderRadius": 10,
+        "height": 100,
+        "marginRight": 10,
+        "width": 100,
+      }
+    }
+  />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "rgb(32, 125, 64)",
+          "fontSize": 20,
+        }
+      }
+    >
+      defunkt
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="head"
+      numberOfLines={2}
+      style={Object {}}
+    >
+      https://github.com/defunkt
+    </Text>
+  </View>
+</View>
+`;
