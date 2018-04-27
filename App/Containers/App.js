@@ -9,7 +9,7 @@ import { NavigationActions } from 'react-navigation'
 import NetworkListener from '../Services/NetworkListener'
 
 // create our store
-const store = createStore()
+export const store = createStore()
 
 /**
  * Provides an entry point into our application.  Both index.ios.js and index.android.js

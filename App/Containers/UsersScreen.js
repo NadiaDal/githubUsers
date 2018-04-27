@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, ActivityIndicator, FlatList, TouchableOpacity } from 'react-native'
+import { View, ActivityIndicator, FlatList, TouchableOpacity, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { Colors } from '../Themes'
 import UsersActions from '../Redux/UsersRedux'
@@ -43,9 +43,12 @@ class UsersScreen extends Component {
     const nextPage = {...query, since }
     this.props.loadNext(nextPage)
   }
-  renderErrorMsg = () => {
+
+  renderErrorMsg = (msg) => {
     return (
-      <Text style={styles.error}>The search result is not available</Text>
+      <View style={styles.loaderContainer}>
+        <Text style={styles.error}>{msg}</Text>
+      </View>
     )
   }
 
@@ -62,11 +65,12 @@ class UsersScreen extends Component {
   }
 
   render () {
-    const { users, error } = this.props
+    const { users, error, fetchingFollowers, fetchingUsers } = this.props
     return (
       <View style={styles.container}>
-        {error ? this.renderErrorMsg() : (users === null || users.length === 0 ? this.renderLoader() : this.renderUserProfiles())}
-        {this.props.fetching && this.renderLoader()}
+        {users.length > 0 && this.renderUserProfiles()}
+        {error && users.length === 0 && this.renderErrorMsg('The search result is not available')}
+        {(fetchingUsers || fetchingFollowers) && this.renderLoader()}
       </View>
     )
   }
@@ -75,7 +79,8 @@ class UsersScreen extends Component {
 const mapStateToProps = (state) => {
   return {
     users: state.users.data,
-    fetching: state.followers.fetching,
+    fetchingFollowers: state.followers.fetching,
+    fetchingUsers: state.users.fetching,
     error: state.users.error,
     query: state.users.query
   }

@@ -4,7 +4,8 @@ import { ApplicationStyles, Colors, Metrics } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    flex: 1,
+    flex: 1,alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: Colors.darkishGreen
   },
   loaderContainer: {
@@ -46,7 +47,7 @@ export default StyleSheet.create({
   },
   url: {},
   error: {
-    fontSize: 20,
-    color: Colors.bloodOrange
+    fontSize: 18,
+    color: Colors.text
   }
 })
