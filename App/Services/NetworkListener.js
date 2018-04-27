@@ -1,4 +1,6 @@
 import {NetInfo, Alert} from 'react-native'
+import {store} from '../Containers/App'
+import StartupAction from '../Redux/StartupRedux'
 
 class NetworkListener {
   static start () {
@@ -20,6 +22,7 @@ class NetworkListener {
     if (connectionInfo.type === 'none') {
       Alert.alert('No internet connection')
     } else {
+      store.dispatch(StartupAction.startup())
     }
   }
 }
