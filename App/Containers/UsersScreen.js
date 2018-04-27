@@ -39,7 +39,8 @@ class UsersScreen extends Component {
 
   loadNext = () => {
     const {query} = this.props
-    const nextPage = {...query, page: query.page + 1}
+    const since = query.since + query.per_page
+    const nextPage = {...query, since }
     this.props.loadNext(nextPage)
   }
   renderErrorMsg = () => {

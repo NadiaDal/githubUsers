@@ -6,7 +6,7 @@ const { screenHeight } = Metrics
 export function * startup (api, action) {
   try {
     const query = {
-      page: 1,
+      since: 0,
       per_page: parseInt(screenHeight / 100 * 3, 10)
     }
     yield put(UsersActions.usersRequest(query))
