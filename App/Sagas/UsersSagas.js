@@ -6,7 +6,7 @@ import { NavigationActions } from 'react-navigation'
 export function * getAllUsers (api, {query}) {
   const response = yield call(api.getUsers, query)
   if (response.ok) {
-    yield put(UsersActions.usersSuccess(response.data, query))
+    yield put(UsersActions.usersSuccess(response.data))
   } else {
     yield put(UsersActions.usersFailure())
   }
