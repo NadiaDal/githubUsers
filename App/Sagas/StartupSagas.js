@@ -3,7 +3,7 @@ import UsersActions, { UsersSelectors } from '../Redux/UsersRedux'
 import { Metrics } from '../Themes'
 const { screenHeight } = Metrics
 
-const selectQuery = state => state.users.query
+export const selectQuery = state => state.users.query
 
 export function * startup (api, action) {
   try {

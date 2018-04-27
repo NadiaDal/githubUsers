@@ -7,14 +7,9 @@ test('usersRequest', () => {
 
 test('usersSuccess', () => {
   const payload = [{login: 'sdfdfs', html_url: ''}]
-  const query = {
-    page: 1,
-    per_page: 40
-  }
-  const state = reducer(INITIAL_STATE, Actions.usersSuccess(payload, query))
+  const state = reducer(INITIAL_STATE, Actions.usersSuccess(payload))
   expect(state.fetching).toBe(false)
   expect(state.error).toBe(false)
-  expect(state.query).toEqual(query)
   expect(state.data).toEqual(payload)
 })
 
@@ -22,6 +17,5 @@ test('usersFailure', () => {
   const state = reducer(INITIAL_STATE, Actions.usersFailure())
   expect(state.fetching).toBe(false)
   expect(state.error).toBe(true)
-  expect(state.data).toEqual([])
 })
 
