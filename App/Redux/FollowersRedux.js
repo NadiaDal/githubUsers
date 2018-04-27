@@ -30,12 +30,12 @@ export const FollowersSelectors = {
 
 // request the data from an api
 export const request = (state, {currentUser}) =>
-  state.merge({ fetching: true, payload: null, currentUser })
+  state.merge({ fetching: true, currentUser })
 
 // successful api lookup
 export const success = (state, action) => {
   const { payload } = action
-  return state.merge({ fetching: false, error: null, payload })
+  return state.merge({ fetching: false, error: false, payload })
 }
 
 // Something went wrong somewhere.

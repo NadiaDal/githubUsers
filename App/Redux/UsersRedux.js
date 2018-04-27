@@ -37,12 +37,12 @@ export const request = (state, action) =>
 // successful api lookup
 export const success = (state, action) => {
   const { payload, query } = action
-  return state.merge({ fetching: false, error: null, data: [...state.data, ...payload], query })
+  return state.merge({ fetching: false, error: false, data: [...state.data, ...payload], query })
 }
 
 // Something went wrong somewhere.
 export const failure = state =>
-  state.merge({ fetching: false, error: true, data: null })
+  state.merge({ fetching: false, error: true, data: [] })
 
 /* ------------- Hookup Reducers To Types ------------- */
 

@@ -14,6 +14,14 @@ test('usersSuccess', () => {
   const state = reducer(INITIAL_STATE, Actions.usersSuccess(payload, query))
   expect(state.fetching).toBe(false)
   expect(state.error).toBe(false)
-  expect(state.query).toBe(query)
-  expect(state.payload).toBe(payload)
+  expect(state.query).toEqual(query)
+  expect(state.data).toEqual(payload)
 })
+
+test('usersFailure', () => {
+  const state = reducer(INITIAL_STATE, Actions.usersFailure())
+  expect(state.fetching).toBe(false)
+  expect(state.error).toBe(true)
+  expect(state.data).toEqual([])
+})
+
